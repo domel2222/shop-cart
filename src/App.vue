@@ -20,7 +20,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #26a842;
+  color: #070f09;
 }
 
 // #nav {
@@ -52,7 +52,7 @@ body {
     font-weight:bold;
     color: #a9a9a9 ;
     text-decoration: none;
-    margin: 0 0.15rem 0 0.15rem;
+    margin: 0 0.2rem 0 0.2rem;
     font-size: 1.25rem;
     &.active {
       color: #2c3e50;
