@@ -7,7 +7,7 @@
         <p class="card__text--muted"> {{ product.category }}</p>
         
         <div class="container__button">
-        <AwesomeButton :text="'Lalala'"></AwesomeButton> 
+        <AwesomeButton :text="'View'" @click="$emit('view-product', product)"></AwesomeButton> 
         <AwesomeButton :text="'Lalala'"></AwesomeButton> 
         </div>
     </div>

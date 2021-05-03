@@ -1,12 +1,17 @@
 <template>
   <div class="container">
-      <div class="container__product">
-        <ProductSummaryCard
-        v-for="product in items"
-        :key="product.id"
-        :product="product"
-        />
-      </div>
+    <ProductDescriptionDrawer
+      :product="product"
+      :active="product_drawer"
+    />
+    <div class="container__product">
+      <ProductSummaryCard
+      v-for="product in items"
+      :key="product.id"
+      :product="product"
+      v-on:view-product="viewProduct($event)"
+      />
+    </div>
   </div>
 </template>
 
@@ -14,13 +19,16 @@
 // @ is an alias to /src
 import items from '../data/items.js'
 import ProductSummaryCard from '../components/products/ProductSummaryCard.vue'
+import ProductDescriptionDrawer from '../components/products/ProductDescriptionDrawer.vue'
+import { ref } from 'vue'
 
 
 export default {
   name: 'Home',
   
   components: {
-    ProductSummaryCard
+    ProductSummaryCard,
+    ProductDescriptionDrawer
 // },
 //  data (){
 //    return {
@@ -29,8 +37,15 @@ export default {
     
  },
  setup() {
+
+      const product_drawer = ref(false);
       
-      return {items}
+      function viewProduct(product){
+        this.product = product;
+        console.log(product)
+      }
+
+      return {items,viewProduct, product_drawer}
     },
 }
 </script>
