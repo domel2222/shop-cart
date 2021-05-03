@@ -2,7 +2,7 @@
   <div class="container">
     <ProductDescriptionDrawer
       :product="product"
-      :active="product_drawer"
+      :active="active.productDrawer"
     />
     <div class="container__product">
       <ProductSummaryCard
@@ -20,7 +20,7 @@
 import items from '../data/items.js'
 import ProductSummaryCard from '../components/products/ProductSummaryCard.vue'
 import ProductDescriptionDrawer from '../components/products/ProductDescriptionDrawer.vue'
-import { ref } from 'vue'
+// import { ref } from 'vue'
 
 
 export default {
@@ -29,24 +29,39 @@ export default {
   components: {
     ProductSummaryCard,
     ProductDescriptionDrawer
-// },
-//  data (){
-//    return {
-//      items: items
-//    }
-    
+},
+ data (){
+   return {
+     items: items,
+     product: null,
+     active: {
+       productDrawer: false
+     }
+   }
  },
- setup() {
+ methods: {
+   viewProduct(product){
+     this.product = product,
+     this.active.productDrawer = true,
+     console.log(product);
+   }
+ },
+    
+//  },
+//  setup() {
 
-      const product_drawer = ref(false);
+//       const productDrawer = ref(false);
       
-      function viewProduct(product){
-        this.product = product;
-        console.log(product)
-      }
+//       function viewProduct(product){
+//         console.log("ff");
+//         console.log(product);
+//         // product.value = product;
+//         // productDrawer.value = true;
+//         // console.log(product)
+//       }
 
-      return {items,viewProduct, product_drawer}
-    },
+//       return {items, viewProduct, productDrawer}
+//     },
 }
 </script>
 <style lang="scss">

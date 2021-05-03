@@ -9,6 +9,7 @@
         <div class="container__button">
         <AwesomeButton :text="'View'" @click="$emit('view-product', product)"></AwesomeButton> 
         <AwesomeButton :text="'Lalala'"></AwesomeButton> 
+        
         </div>
     </div>
 </template>
@@ -17,6 +18,7 @@
 <script>
 
 import AwesomeButton from "../buttons/AwesomeButton.vue"
+
 
 export default {
     props : {
@@ -50,10 +52,14 @@ export default {
         margin: 20px 20px ;
         font-size: .85rem;
     }
-    &__text--muted {
-        margin: 20px 20px ;
-        color: #b19f9f;
+    &__text{
+        &--muted {
+            margin: 20px 20px ;
+            color: #b19f9f;
+        }
     }
+    
+
 }
 .container__button{
     width: 12rem;

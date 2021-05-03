@@ -7,7 +7,7 @@
 
 <script>
 export default {
-    name: "AwesomeButton",
+    name: "ButtonSuper",
     props: {
         text: {
         type: String,
@@ -34,8 +34,8 @@ export default {
   transition: background-color 0.1s ease-in, color 0.1s ease-in,
     border-color 0.1s ease-in;
   &:hover {
-    background-color: #000;
-    color: #fff;
+    background-color: rgb(212, 25, 25);
+    color: rgb(63, 184, 26);
     border-color: #000;
   }
 }
