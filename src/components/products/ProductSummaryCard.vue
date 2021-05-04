@@ -6,7 +6,7 @@
         <p class="card__description">Description: {{ product.description.substring(0, 150) }}</p>
         <p class="card__text--muted"> {{ product.category }}</p>
         
-        <div class="container__button">
+        <div class="card__button">
         <AwesomeButton :text="'View'" @click="$emit('view-product', product)"></AwesomeButton> 
         <AwesomeButton :text="'Lalala'"></AwesomeButton> 
         
@@ -58,14 +58,14 @@ export default {
             color: #b19f9f;
         }
     }
-    
-
-}
-.container__button{
-    width: 12rem;
+    &__button{
+        width: 12rem;
     display: flex;
     justify-content:space-around;
+    }
+
 }
+
 @media (min-width: 500px) {
     .card {
         width: 21rem;

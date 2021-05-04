@@ -1,6 +1,6 @@
 <template>
     <div class="background" :class="{show: active}" @click="$emit('close-product-drawer')"></div>
-        
+    
     <div class="drawer" :class="{show: active}">
         <div class="drawer__close"  @click="$emit('close-product-drawer')">X</div>
         
@@ -11,15 +11,12 @@
             <h3 class="drawer__details__text">{{ product.price.toFixed(2)}}</h3>
 
             <div class="drawer__details__total" v-if="productTotal">
-                <h3>In cart</h3>
-                <h4>{{productTotal}}</h4>
+                <h3 class="drawer__details__text">In cart</h3>
+                <h4 class="drawer__details__text">{{productTotal}}</h4>
             </div>
             <div class="drawer__details__button">
-                <button>Remove</button>
-                <button>Add</button>
-                 
-                <!-- <AwesomeButton :text="'Add'">DUPA</AwesomeButton> 
-                <AwesomeButton :text="'Remove'">DUPA</AwesomeButton>  -->
+                <AwesomeButton :text="'Add'" @click="addToCart()"></AwesomeButton> 
+                <AwesomeButton :text="'Remove'" @click="removeFromCart()"></AwesomeButton> 
             </div>
         </div>
     </div>
@@ -29,12 +26,10 @@
 
 
 
-import { computed } from 'vue';
-// import ButtonSuper from "../buttons/ButtonSuper.vue"
+// import { computed } from 'vue';
+import AwesomeButton from "../buttons/AwesomeButton.vue"
 
 export default {
-
-    name: "ProductDescriptionDrawer",
     props : 
     {
     product: {
@@ -45,20 +40,31 @@ export default {
         type: Boolean,
         default: false,
     },
-    // components: {
-    //     ButtonSuper
-    // },
+    
   },
-//   computed: {
-//         productTotal(){
-//             return 56;
-//         }
-//     },
-  setup() {
-      const productTotal = computed(() => 56)
 
-      return{productTotal}
-  }
+  components: {
+        AwesomeButton
+    },
+  computed: {
+        productTotal(){
+            return this.$store.getters.productQuantity(this.product);
+        }
+    },
+  methods: {
+        addToCart(){
+            console.log("ggg")
+            this.$store.commit('addToCart', this.product);
+        },
+        removeFromCart(){
+            this.$store.commit('removeFromCart', this.product)
+        }
+    },
+//   setup() {
+//       const productTotal = computed(() => `this.{$store.getters.productQuantity(this.product)}`)
+
+//       return{ productTotal }
+//   }
 
 }
 </script>
@@ -72,7 +78,7 @@ export default {
     left: 0;
     top: 0;
     background-color: rgba(120,120,120, 0.6);
-    z-index: 100;
+    z-index: 100; // refactor create teleport
     display: none;
     transform: display .5s;
     &.show {
@@ -107,20 +113,32 @@ export default {
         }
     }
     &__details{
+        
         display: flex;
-        justify-content: center;
+        align-items: center;
         flex-direction: column;
         &__description{
+            margin-top: .8rem;
             padding: 1.6rem;
             line-height: 1.5rem;
         }
+        &__text{
+            margin-top: 0.5rem;
+        }
         &__button{
-        display: flex;
-        justify-content:space-around;
+            margin-top: 0.8rem;
+            width: 15rem;
+            display: flex;
+            justify-content:space-around;
+            button {
+                width: 5rem;
+                }
+            }
+            
         }
 
     }
-}
+
 @media (min-width: 500px){
     .drawer{
     width: 450px;

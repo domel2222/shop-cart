@@ -2,7 +2,8 @@
   <div class="container">
     <ProductDescriptionDrawer
       :product="product"
-      :active="active.productDrawer"
+      :active="productDrawer"
+      v-on:close-product-drawer="closeProductDrawer()"
     />
     <div class="container__product">
       <ProductSummaryCard
@@ -20,7 +21,7 @@
 import items from '../data/items.js'
 import ProductSummaryCard from '../components/products/ProductSummaryCard.vue'
 import ProductDescriptionDrawer from '../components/products/ProductDescriptionDrawer.vue'
-// import { ref } from 'vue'
+import { ref } from 'vue'
 
 
 export default {
@@ -30,38 +31,38 @@ export default {
     ProductSummaryCard,
     ProductDescriptionDrawer
 },
- data (){
-   return {
-     items: items,
-     product: null,
-     active: {
-       productDrawer: false
-     }
-   }
- },
- methods: {
-   viewProduct(product){
-     this.product = product,
-     this.active.productDrawer = true,
-     console.log(product);
-   }
- },
-    
+//  data (){
+//    return {
+//      items: items,
+//      product: null,
+//      active: {
+//        productDrawer: false
+//      }
+//    }
 //  },
-//  setup() {
+//  methods: {
+//    viewProduct(product){
+//      this.product = product,
+//      this.active.productDrawer = true,
+//      console.log(product);
+//    }
+//  },
+    
+ 
+ setup() {
+      // console.log(items);
+      const productDrawer = ref(false);
+      const product = ref(null);
+      function viewProduct(product){
+        this.product = product;
+        productDrawer.value = true;
+      }
 
-//       const productDrawer = ref(false);
-      
-//       function viewProduct(product){
-//         console.log("ff");
-//         console.log(product);
-//         // product.value = product;
-//         // productDrawer.value = true;
-//         // console.log(product)
-//       }
-
-//       return {items, viewProduct, productDrawer}
-//     },
+      function closeProductDrawer(){
+        productDrawer.value = false;
+      }
+      return {viewProduct, productDrawer, product, items, closeProductDrawer}
+    },
 }
 </script>
 <style lang="scss">
